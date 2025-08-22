@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date: 04/13/2025 09:34:39 AM
+// Create Date: 03/03/2025 09:54:17 AM
 // Design Name: 
-// Module Name: binary_2_gray_4bit
+// Module Name: Nbit_comp_tb
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -20,12 +20,22 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module binary_2_gray_4bit(B,G);
- input [3:0] B;
- output [3:0] G;
+module Nbit_comp_tb();
+ reg [15:0]A,B;
+ wire gt,lt,eq;
+// integer myseed;
+ Nbit_comp DUT(A,B,gt,lt,eq);
  
- assign G[3]=B[3];
- assign G[2]=B[2]^B[3];
- assign G[1]=B[1]^B[2];
- assign G[0]=B[0]^B[1];
+// initial myseed=15;
+ initial
+ begin
+   repeat(6)
+   begin
+     A=$random;
+     B=$random;
+     $display("T=%3d,A=%h,B=%h,gt=%b,lt=%b,eq=%b",$time,A,B,gt,lt,eq);
+     #5;
+   end
+   #5 $finish;
+ end
 endmodule
